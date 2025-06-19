@@ -12,5 +12,18 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     }
+  },
+  modules: {
+    inventory: true,
+    stock_location: true,
+    sales_channel: true,
+    product: true,
+    region: true,
+    user: {
+      resolve: "@medusajs/user",
+      options: {
+        jwt_secret: process.env.JWT_SECRET || "supersecret"
+      }
+    },
   }
 })
