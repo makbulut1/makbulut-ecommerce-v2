@@ -133,7 +133,7 @@ export default async function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://github.com/medusajs/nextjs-starter-medusa"
+                    href="https://github.com/makbulut1/makbulut-ecommerce.git"
                     target="_blank"
                     rel="noreferrer"
                     className="hover:text-ui-fg-base"
