@@ -198,6 +198,137 @@ export default async function seedDemoData({ container }: { container: any }) {
         logger.info(`Stok eklendi: ${variant.sku} - İstanbul Depo - 100 adet`)
       }
     }
+
+    // Kategorileri oluştur
+    const productCategoryModuleService = container.resolve(Modules.PRODUCT_CATEGORY)
+    const categories = [
+      { name: "Shirts", is_active: true },
+      { name: "Sweatshirts", is_active: true },
+      { name: "Pants", is_active: true }
+    ]
+    const createdCategories = []
+    for (const cat of categories) {
+      let existing = await productCategoryModuleService.listProductCategories({ name: cat.name })
+      if (!existing.length) {
+        [existing] = await productCategoryModuleService.createProductCategories([cat])
+      } else {
+        existing = existing[0]
+      }
+      createdCategories.push(existing)
+    }
+    // Medusa T-Shirt
+    const [medusaTshirt] = await productModuleService.createProducts([
+      {
+        title: "Medusa T-Shirt",
+        description: "Reimagine the feeling of a classic T-shirt. With our cotton T-shirts, everyday essentials no longer have to be ordinary.",
+        handle: "t-shirt",
+        status: "published",
+        images: [
+          { url: "https://medusa-public-images.s3.eu-west-1.amazonaws.com/tee-black-front.png" },
+          { url: "https://medusa-public-images.s3.eu-west-1.amazonaws.com/tee-black-back.png" },
+          { url: "https://medusa-public-images.s3.eu-west-1.amazonaws.com/tee-white-front.png" },
+          { url: "https://medusa-public-images.s3.eu-west-1.amazonaws.com/tee-white-back.png" }
+        ],
+        options: [
+          { title: "Beden", values: ["S", "M", "L", "XL"] },
+          { title: "Renk", values: ["Siyah", "Beyaz"] }
+        ],
+        variants: [
+          { title: "S / Siyah", sku: "SHIRT-S-BLACK", options: { Beden: "S", Renk: "Siyah" }, prices: [{ amount: 1000, currency_code: "try" }], manage_inventory: true },
+          { title: "S / Beyaz", sku: "SHIRT-S-WHITE", options: { Beden: "S", Renk: "Beyaz" }, prices: [{ amount: 1000, currency_code: "try" }], manage_inventory: true },
+          { title: "M / Siyah", sku: "SHIRT-M-BLACK", options: { Beden: "M", Renk: "Siyah" }, prices: [{ amount: 1000, currency_code: "try" }], manage_inventory: true },
+          { title: "M / Beyaz", sku: "SHIRT-M-WHITE", options: { Beden: "M", Renk: "Beyaz" }, prices: [{ amount: 1000, currency_code: "try" }], manage_inventory: true },
+          { title: "L / Siyah", sku: "SHIRT-L-BLACK", options: { Beden: "L", Renk: "Siyah" }, prices: [{ amount: 1000, currency_code: "try" }], manage_inventory: true },
+          { title: "L / Beyaz", sku: "SHIRT-L-WHITE", options: { Beden: "L", Renk: "Beyaz" }, prices: [{ amount: 1000, currency_code: "try" }], manage_inventory: true },
+          { title: "XL / Siyah", sku: "SHIRT-XL-BLACK", options: { Beden: "XL", Renk: "Siyah" }, prices: [{ amount: 1000, currency_code: "try" }], manage_inventory: true },
+          { title: "XL / Beyaz", sku: "SHIRT-XL-WHITE", options: { Beden: "XL", Renk: "Beyaz" }, prices: [{ amount: 1000, currency_code: "try" }], manage_inventory: true }
+        ],
+        categories: [createdCategories.find(c => c.name === "Shirts").id],
+        sales_channels: [salesChannel.id]
+      }
+    ])
+    // Medusa Sweatshirt
+    const [medusaSweatshirt] = await productModuleService.createProducts([
+      {
+        title: "Medusa Sweatshirt",
+        description: "Reimagine the feeling of a classic sweatshirt. With our cotton sweatshirt, everyday essentials no longer have to be ordinary.",
+        handle: "sweatshirt",
+        status: "published",
+        images: [
+          { url: "https://medusa-public-images.s3.eu-west-1.amazonaws.com/sweatshirt-vintage-front.png" },
+          { url: "https://medusa-public-images.s3.eu-west-1.amazonaws.com/sweatshirt-vintage-back.png" }
+        ],
+        options: [
+          { title: "Beden", values: ["S", "M", "L", "XL"] }
+        ],
+        variants: [
+          { title: "S", sku: "SWEATSHIRT-S", options: { Beden: "S" }, prices: [{ amount: 1500, currency_code: "try" }], manage_inventory: true },
+          { title: "M", sku: "SWEATSHIRT-M", options: { Beden: "M" }, prices: [{ amount: 1500, currency_code: "try" }], manage_inventory: true },
+          { title: "L", sku: "SWEATSHIRT-L", options: { Beden: "L" }, prices: [{ amount: 1500, currency_code: "try" }], manage_inventory: true },
+          { title: "XL", sku: "SWEATSHIRT-XL", options: { Beden: "XL" }, prices: [{ amount: 1500, currency_code: "try" }], manage_inventory: true }
+        ],
+        categories: [createdCategories.find(c => c.name === "Sweatshirts").id],
+        sales_channels: [salesChannel.id]
+      }
+    ])
+    // Medusa Sweatpants
+    const [medusaSweatpants] = await productModuleService.createProducts([
+      {
+        title: "Medusa Sweatpants",
+        description: "Reimagine the feeling of classic sweatpants. With our cotton sweatpants, everyday essentials no longer have to be ordinary.",
+        handle: "sweatpants",
+        status: "published",
+        images: [
+          { url: "https://medusa-public-images.s3.eu-west-1.amazonaws.com/sweatpants-gray-front.png" },
+          { url: "https://medusa-public-images.s3.eu-west-1.amazonaws.com/sweatpants-gray-back.png" }
+        ],
+        options: [
+          { title: "Beden", values: ["S", "M", "L", "XL"] }
+        ],
+        variants: [
+          { title: "S", sku: "SWEATPANTS-S", options: { Beden: "S" }, prices: [{ amount: 1200, currency_code: "try" }], manage_inventory: true },
+          { title: "M", sku: "SWEATPANTS-M", options: { Beden: "M" }, prices: [{ amount: 1200, currency_code: "try" }], manage_inventory: true },
+          { title: "L", sku: "SWEATPANTS-L", options: { Beden: "L" }, prices: [{ amount: 1200, currency_code: "try" }], manage_inventory: true },
+          { title: "XL", sku: "SWEATPANTS-XL", options: { Beden: "XL" }, prices: [{ amount: 1200, currency_code: "try" }], manage_inventory: true }
+        ],
+        categories: [createdCategories.find(c => c.name === "Pants").id],
+        sales_channels: [salesChannel.id]
+      }
+    ])
+    // Inventory işlemleri
+    const allMedusaVariants = [
+      ...medusaTshirt.variants,
+      ...medusaSweatshirt.variants,
+      ...medusaSweatpants.variants
+    ]
+    for (const variant of allMedusaVariants) {
+      let inventoryItem: any = null
+      const items = await inventoryModuleService.listInventoryItems({ sku: variant.sku })
+      if (items.length > 0) {
+        inventoryItem = items[0]
+      } else {
+        inventoryItem = await inventoryModuleService.createInventoryItem({
+          sku: variant.sku,
+          origin_country: "tr",
+          manage_inventory: true,
+          variant_id: variant.id
+        })
+        logger.info(`Inventory item oluşturuldu: ${variant.sku}`)
+      }
+      if (!inventoryItem) {
+        throw new Error(`Inventory item oluşturulamadı: ${variant.sku}`)
+      }
+      const levels = await inventoryModuleService.listInventoryLevels({ inventory_item_id: inventoryItem.id })
+      const hasLevel = levels.find(l => l.location_id === stockLocation.id)
+      if (!hasLevel) {
+        await inventoryModuleService.createInventoryLevel({
+          inventory_item_id: inventoryItem.id,
+          location_id: stockLocation.id,
+          stocked_quantity: 100
+        })
+        logger.info(`Stok eklendi: ${variant.sku} - İstanbul Depo - 100 adet`)
+      }
+    }
   } catch (e) {
     logger.error("Ürün/stock işlemlerinde hata oluştu: " + e.message)
   }
