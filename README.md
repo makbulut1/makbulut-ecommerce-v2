@@ -70,9 +70,9 @@ npx medusa db:migrate
 ### 3.4. Seed (Demo Veri Yükleme)
 
 ```bash
-yarn medusa seed -f src/scripts/seed.ts
+yarn medusa exec src/scripts/seed.ts
 # veya
-npx medusa seed -f src/scripts/seed.ts
+npx medusa exec src/scripts/seed.ts
 ```
 
 ### 3.5. Admin Kullanıcı Oluşturma
@@ -88,9 +88,9 @@ npx medusa user -e admin@makbulut.com -p sifre123
 ### 3.6. Backend'i Başlat
 
 ```bash
-yarn start
+yarn dev
 # veya
-npm start
+npm run dev
 ```
 
 ---
