@@ -80,9 +80,9 @@ npx medusa exec src/scripts/seed.ts
 Seed scripti ile otomatik olarak bir admin kullanıcı oluşturulur. Eğer elle eklemek isterseniz:
 
 ```bash
-yarn medusa user -e admin@makbulut.com -p sifre123
+yarn medusa user -e admin@makbulut.com -p admin123
 # veya
-npx medusa user -e admin@makbulut.com -p sifre123
+npx medusa user -e admin@makbulut.com -p admin123
 ```
 
 ### 3.6. Backend'i Başlat
