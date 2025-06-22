@@ -67,15 +67,15 @@ Medusa altyapısı ile geliştirilmiş, ölçeklenebilir ve özelleştirilebilir
 4. **Run Migrations and Seed Data**
    - Migrate database schema:
      ```bash
-     yarn medusa migrations run
+     yarn medusa db:migrate
      # or
-     npx medusa migrations run
+     npx medusa db:migrate
      ```
    - Seed with sample data:
      ```bash
-     yarn medusa seed -f src/scripts/seed.ts
+    yarn medusa exec src/scripts/seed.ts
      # or
-     npx medusa seed -f src/scripts/seed.ts
+    npx medusa exec src/scripts/seed.ts
      ```
    - (Optional) Create admin user manually:
      ```bash
