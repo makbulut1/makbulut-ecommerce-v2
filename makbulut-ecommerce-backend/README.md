@@ -1,42 +1,50 @@
 # Makbulut Store Backend
 
-Bu proje, Medusa altyapısı kullanılarak geliştirilmiş bir e-ticaret backend uygulamasıdır.
+![License](https://img.shields.io/github/license/kullaniciadi/makbulut-ecommerce)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-## Gereksinimler
+---
 
-Projeyi çalıştırmadan önce aşağıdaki araçların sisteminizde kurulu olması gerekmektedir:
+A modern, scalable, and customizable e-commerce backend built with Medusa.
 
-- **Node.js**: v20 veya üzeri (Örnek: v20.19.0)
-- **Yarn**: v1.22.x veya v3.x (Örnek: v1.22.22 veya v3.2.3)
-- **Docker**: v20 veya üzeri (Örnek: Docker version 28.1.1)
-- **Docker Compose**: v2 veya üzeri (genellikle Docker Desktop ile birlikte gelir)
+Medusa altyapısı ile geliştirilmiş, ölçeklenebilir ve özelleştirilebilir bir e-ticaret backend uygulaması.
 
-> **Not:** Docker Compose, Docker Desktop ile birlikte gelir. Docker kuruluysa ayrıca yüklemeniz gerekmez.
+---
 
-Kurulum adımlarına geçmeden önce yukarıdaki araçların kurulu ve PATH değişkeninize ekli olduğundan emin olun.
+## Requirements
 
-## Özellikler
-- Modern, ölçeklenebilir ve özelleştirilebilir altyapı
-- Güçlü API desteği
-- Esnek modül sistemi
+- **Node.js**: v20 or higher (e.g. v20.19.0)
+- **Yarn**: v1.22.x or v3.x (e.g. v1.22.22 or v3.2.3)
+- **Docker**: v20 or higher (e.g. Docker version 28.1.1)
+- **Docker Compose**: v2 or higher (usually included with Docker Desktop)
 
-## Kurulum Adımları
+> Ensure all tools above are installed and available in your PATH before proceeding.
 
-1. **Veritabanı ve Redis'i Başlatın**
-   - Proje kök dizininde aşağıdaki komut ile Postgres ve Redis'i Docker üzerinden başlatın:
+---
+
+## Features
+- Modern, scalable, and customizable infrastructure
+- Powerful API support
+- Flexible module system
+
+---
+
+## Setup Steps
+
+1. **Start Database and Redis**
+   - In the project root, run:
      ```bash
      docker-compose up -d
      ```
-   - Postgres'in (5432) ve Redis'in (6379) çalıştığından emin olun.  
-     Bunu kontrol etmek için:
+   - Ensure Postgres (5432) and Redis (6379) are running:
      ```bash
      docker ps
      ```
-     komutunu kullanabilirsiniz. Çıktıda `medusa-postgres` ve `medusa-redis` container'larının "Up" durumda olması gerekir.
+     You should see `medusa-postgres` and `medusa-redis` containers "Up".
 
-2. **Ortam Değişkenlerini Ayarlayın**
-   - `makbulut-ecommerce-backend` dizininde bir `.env` dosyası oluşturun ve aşağıdaki örnekteki gibi doldurun:
-     ```
+2. **Configure Environment Variables**
+   - In `makbulut-ecommerce-backend`, create a `.env` file:
+     ```env
      DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
      STORE_CORS=http://localhost:8000
      ADMIN_CORS=http://localhost:7000
@@ -51,31 +59,45 @@ Kurulum adımlarına geçmeden önce yukarıdaki araçların kurulu ve PATH değ
      USER_DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
      ```
 
-3. **Bağımlılıkları Yükleyin**
+3. **Install Dependencies**
    ```bash
    yarn install
    ```
 
-4. **Veritabanı Migration ve Seed İşlemleri**
-   - Migration (şema oluşturma):
+4. **Run Migrations and Seed Data**
+   - Migrate database schema:
      ```bash
      yarn medusa migrations run
+     # or
+     npx medusa migrations run
      ```
-   - Seed (örnek veri ekleme):
+   - Seed with sample data:
      ```bash
-     yarn seed
+     yarn medusa seed -f src/scripts/seed.ts
+     # or
+     npx medusa seed -f src/scripts/seed.ts
+     ```
+   - (Optional) Create admin user manually:
+     ```bash
+     yarn medusa user -e admin@makbulut.com -p sifre123
+     # or
+     npx medusa user -e admin@makbulut.com -p sifre123
      ```
 
-5. **Backend'i Başlatın**
+5. **Start the Backend**
    ```bash
    yarn dev
    ```
 
-## Kullanılan Teknolojiler
-- [Medusa](https://medusajs.com/) (altyapı)
+---
+
+## Technologies Used
+- [Medusa](https://medusajs.com/)
 - PostgreSQL
 - Redis
 - Node.js / TypeScript
 
-## Lisans
+---
+
+## License
 MIT 

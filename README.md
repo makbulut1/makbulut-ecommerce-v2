@@ -37,7 +37,18 @@ cp .env.template .env
 > **Not:** `.env` dosyasındaki veritabanı bağlantı bilgileri Docker'daki PostgreSQL ile uyumlu olmalı. Örnek:
 > 
 > ```env
-> DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa-db
+>      DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
+     STORE_CORS=http://localhost:8000
+     ADMIN_CORS=http://localhost:7000
+     AUTH_CORS=http://localhost:7000,http://localhost:8000
+     JWT_SECRET=supersecret
+     COOKIE_SECRET=supersecret
+     STOCK_LOCATION_DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
+     INVENTORY_DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
+     SALES_CHANNEL_DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
+     PRODUCT_DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
+     REGION_DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
+     USER_DATABASE_URL=postgres://postgres:postgres@localhost:5432/medusa
 > ````
 
 ### 3.2. Bağımlılıkları Kur
@@ -51,9 +62,9 @@ npm install
 ### 3.3. Veritabanı Migration (Yapılandırma)
 
 ```bash
-yarn medusa migrations run
+yarn medusa db:migrate
 # veya
-npx medusa migrations run
+npx medusa db:migrate
 ```
 
 ### 3.4. Seed (Demo Veri Yükleme)
