@@ -101,3 +101,11 @@ Medusa altyapısı ile geliştirilmiş, ölçeklenebilir ve özelleştirilebilir
 
 ## License
 MIT 
+
+---
+
+## Veritabanı Diyagramı
+
+Veritabanı şemasının görsel diyagramı için:
+
+[dbdiagram.io üzerinde görüntüle](https://dbdiagram.io/d/68580ab1f039ec6d36537f4f) 
